@@ -1,0 +1,4 @@
+M:a100,txtCount.value
+M:t100,txtTemp.value
+M:w100,txtWater.value
+G:Fan,fs

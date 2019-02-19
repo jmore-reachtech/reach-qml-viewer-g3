@@ -1,10 +1,10 @@
 #include <QtDebug>
 
 #include "serialcontroller.h"
-#include "system.h"
+#include "common.h"
 
 SerialController::SerialController(QObject *parent) : QObject(parent)
-  ,m_settings(APP_SETTINGS_PATH, QSettings::NativeFormat)
+  ,m_settings(APP_SETTINGS_PATH, QSettings::NativeFormat), m_translator(nullptr)
 {
     m_settings.beginGroup("Serial");
     m_port.setPortName(m_settings.value("serial_port").value<QString>());
@@ -26,6 +26,7 @@ SerialController::SerialController(QObject *parent) : QObject(parent)
         qDebug() << "";
 
         connect(&m_port, &QSerialPort::readyRead, this, &SerialController::onSerialReadyRead );
+
     } else {
         qDebug() << "Serial port error: Could not open" << m_port.portName() << " : " << m_port.errorString();
     }
@@ -37,13 +38,27 @@ SerialController::~SerialController()
     m_port.close();
 }
 
+void SerialController::setTranslator(Translator& t)
+{
+    qDebug() << "serial set translator";
+    m_translator = &t;
+}
+
+void SerialController::send(QString msg)
+{
+    if (m_translator == nullptr) {
+        return;
+    }
+
+    m_port.write(m_translator->translateGui(msg).join("").toUtf8());
+}
+
 void SerialController::onSerialReadyRead()
 {
-    qDebug() << "bytes available" << m_port.bytesAvailable() << "can read line " << m_port.canReadLine();
-
     while (m_port.bytesAvailable() && m_port.canReadLine()) {
         qDebug() << "emit message";
         QByteArray ba = m_port.readLine();
-        emit MessageAvailable(ba);
+
+        emit messageAvailable(m_translator->translateSerial(QString(ba)));
     }
 }

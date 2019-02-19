@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQuickView>
+#include <QStringList>
 
 class MainviewController : public QQuickView
 {
@@ -10,7 +11,7 @@ public:
     MainviewController();
 
 public slots:
-    void UpdateView(QByteArray ba);
+    void updateView(QStringList msg);
 
 private:
 

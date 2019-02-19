@@ -27,14 +27,20 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
     serialcontroller.cpp \
-    mainviewcontroller.cpp
+    mainviewcontroller.cpp \
+    translator.cpp
 
 HEADERS += \
     serialcontroller.h \
-    system.h \
-    mainviewcontroller.h
+    mainviewcontroller.h \
+    common.h \
+    translator.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    settings.conf.example \
+    translate.conf.example

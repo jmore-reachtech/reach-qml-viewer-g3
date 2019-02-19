@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QSerialPort>
-#include <QSerialPortInfo>
-#include <QIODevice>
 #include <QSettings>
+
+#include "translator.h"
 
 class SerialController : public QObject
 {
@@ -14,10 +14,13 @@ public:
     explicit SerialController(QObject *parent = nullptr);
     ~SerialController();
 
+    void setTranslator(Translator& t);
+
 signals:
-    void MessageAvailable(QByteArray ba);
+    void messageAvailable(QStringList msg);
 
 public slots:
+    void send(QString msg);
 
 private slots:
     void onSerialReadyRead(void);
@@ -25,6 +28,7 @@ private slots:
 private:
     QSerialPort m_port;
     QSettings m_settings;
+    Translator* m_translator;
 };
 
 #endif // SERIALCONTROLLER_H
