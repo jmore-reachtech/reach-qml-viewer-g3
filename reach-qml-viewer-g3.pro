@@ -22,6 +22,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# If you want to use the translate.conf file for message translations, set USE_TRANSLATIONS
+#DEFINES += USE_TRANSLATIONS
+
 CONFIG += c++11
 
 SOURCES += \

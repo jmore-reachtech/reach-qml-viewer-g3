@@ -46,11 +46,11 @@ void SerialController::setTranslator(Translator& t)
 
 void SerialController::send(QString msg)
 {
-    if (m_translator == nullptr) {
-        return;
-    }
-
+#ifdef USE_TRANSLATIONS
     m_port.write(m_translator->translateGui(msg).join("").toUtf8());
+#else
+    m_port.write(msg.toUtf8());
+#endif
 }
 
 void SerialController::onSerialReadyRead()
@@ -59,6 +59,11 @@ void SerialController::onSerialReadyRead()
         qDebug() << "emit message";
         QByteArray ba = m_port.readLine();
 
+#ifdef USE_TRANSLATIONS
         emit messageAvailable(m_translator->translateSerial(QString(ba)));
+#else
+        QStringList split = QString(ba).split("=");
+        emit messageAvailable(split);
+#endif
     }
 }

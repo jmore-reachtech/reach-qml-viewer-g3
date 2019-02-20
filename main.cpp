@@ -17,8 +17,12 @@ int main(int argc, char *argv[])
 
     QObject::connect(&sc, &SerialController::messageAvailable, &view, &MainviewController::updateView);
 
+#ifdef USE_TRANSLATIONS
+    qDebug() << "Use translations";
     tr.load();
     sc.setTranslator(tr);
+#endif
+    qDebug() << "Translations disabled";
 
     view.setSource(QUrl::fromLocalFile(APP_MAIN_VIEW));
     view.rootContext()->setContextProperty("serial", &sc);
