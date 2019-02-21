@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
 #endif
     qDebug() << "Translations disabled";
 
-    view.setSource(QUrl::fromLocalFile(APP_MAIN_VIEW));
     view.rootContext()->setContextProperty("serial", &sc);
     view.show();
 

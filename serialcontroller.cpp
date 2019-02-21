@@ -49,7 +49,7 @@ void SerialController::send(QString msg)
 #ifdef USE_TRANSLATIONS
     m_port.write(m_translator->translateGui(msg).join("").toUtf8());
 #else
-    m_port.write(msg.toUtf8());
+    m_port.write(msg.append("\n").toUtf8());
 #endif
 }
 

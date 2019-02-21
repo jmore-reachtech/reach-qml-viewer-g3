@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQuickView>
 #include <QStringList>
+#include <QSettings>
 
 class MainviewController : public QQuickView
 {
@@ -14,6 +15,7 @@ public slots:
     void updateView(QStringList msg);
 
 private:
+    QSettings m_settings;
 
 };
 

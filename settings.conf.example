@@ -1,3 +1,6 @@
+[Qml]
+main_view="/data/app/main.qml"
+
 [Serial]
 serial_port="/dev/ttymxc1"
 serial_baud=115200

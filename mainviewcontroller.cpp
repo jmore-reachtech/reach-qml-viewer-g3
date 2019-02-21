@@ -2,10 +2,13 @@
 #include <QQuickItem>
 
 #include "mainviewcontroller.h"
+#include "common.h"
 
-MainviewController::MainviewController()
+MainviewController::MainviewController() :m_settings(APP_SETTINGS_PATH, QSettings::NativeFormat)
 {
-
+    m_settings.beginGroup("Qml");
+    this->setSource(QUrl::fromLocalFile(m_settings.value("main_view").value<QString>()));
+    m_settings.endGroup();
 }
 
 void MainviewController::updateView(QStringList msg)
