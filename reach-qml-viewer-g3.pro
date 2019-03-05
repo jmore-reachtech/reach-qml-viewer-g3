@@ -31,17 +31,19 @@ SOURCES += \
         main.cpp \
     serialcontroller.cpp \
     mainviewcontroller.cpp \
-    translator.cpp
+    translator.cpp \
+    network.cpp
 
 HEADERS += \
     serialcontroller.h \
     mainviewcontroller.h \
     common.h \
-    translator.h
+    translator.h \
+    network.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+else: unix:!android: target.path = /usr/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \

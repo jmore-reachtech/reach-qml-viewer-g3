@@ -10,6 +10,7 @@
 class SerialController : public QObject
 {
     Q_OBJECT
+
 public:
     explicit SerialController(QObject *parent = nullptr);
     ~SerialController();

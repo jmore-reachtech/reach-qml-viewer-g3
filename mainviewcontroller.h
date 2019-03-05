@@ -3,10 +3,11 @@
 
 #include <QObject>
 #include <QQuickView>
+#include <QQmlApplicationEngine>
 #include <QStringList>
 #include <QSettings>
 
-class MainviewController : public QQuickView
+class MainviewController : public QQmlApplicationEngine
 {
 public:
     MainviewController();

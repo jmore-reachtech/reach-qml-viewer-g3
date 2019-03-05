@@ -7,25 +7,29 @@
 #include "mainviewcontroller.h"
 #include "serialcontroller.h"
 #include "translator.h"
+#include "network.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainviewController view;
     SerialController sc;
-    Translator tr;
 
-    QObject::connect(&sc, &SerialController::messageAvailable, &view, &MainviewController::updateView);
+    /* Need to register before the MainviewController is instaniated */
+    qmlRegisterType<Network>("net.reachtech", 1, 0, "Network");
+
+    MainviewController mv;
 
 #ifdef USE_TRANSLATIONS
+    Translator tr;
     qDebug() << "Use translations";
     tr.load();
     sc.setTranslator(tr);
-#endif
+#else
     qDebug() << "Translations disabled";
+#endif
 
-    view.rootContext()->setContextProperty("serial", &sc);
-    view.show();
+    /* Pass serial messages from the SerialController to the MainviewController */
+    QObject::connect(&sc, &SerialController::messageAvailable, &mv, &MainviewController::updateView);
 
     return a.exec();
 }

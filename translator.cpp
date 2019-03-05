@@ -67,13 +67,13 @@ QStringList Translator::translateSerial(QString msg)
     QStringList split = msg.split("=");
 
     if (split.length() != 2) {
-        qDebug() << "msg in wrong format, missing equals";
+        qDebug() << "Message in wrong format, missing equals";
         return split;
     }
 
-    qDebug() << "translate gui msg, key = " << split[0];
+    qDebug() << "Translate gui msg, key = " << split[0];
     if (!m_microMap.contains(split[0])) {
-        qDebug() << "invalid key: " << split[0];
+        qDebug() << "Invalid key: " << split[0];
         return split;
     }
 
@@ -108,7 +108,7 @@ bool Translator::addMapping(QString line, int num)
         /* Split the line on the colon */
         QStringList list = line.split(":");
         if (list.length() != 2) {
-            qDebug() << "line in wrong format, missing comma:" << num;
+            qDebug() << "Line in wrong format, missing comma:" << num;
             return false;
         }
 
@@ -116,7 +116,7 @@ bool Translator::addMapping(QString line, int num)
         QStringList targetPart = list[1].split(",");
 
         if (targetPart.length() != 2){
-            qDebug() << "line in wrong format, missing key,value,target " << num;
+            qDebug() << "Line in wrong format, missing key,value,target " << num;
             return false;
         }
 

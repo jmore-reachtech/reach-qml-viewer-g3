@@ -34,13 +34,13 @@ SerialController::SerialController(QObject *parent) : QObject(parent)
 
 SerialController::~SerialController()
 {
-    qDebug() << "closing serial port";
+    qDebug() << "Closing serial port";
     m_port.close();
 }
 
 void SerialController::setTranslator(Translator& t)
 {
-    qDebug() << "serial set translator";
+    qDebug() << "Serial set translator";
     m_translator = &t;
 }
 
@@ -56,8 +56,10 @@ void SerialController::send(QString msg)
 void SerialController::onSerialReadyRead()
 {
     while (m_port.bytesAvailable() && m_port.canReadLine()) {
-        qDebug() << "emit message";
         QByteArray ba = m_port.readLine();
+
+        /* remove the newline char */
+        ba.chop(1);
 
 #ifdef USE_TRANSLATIONS
         emit messageAvailable(m_translator->translateSerial(QString(ba)));
