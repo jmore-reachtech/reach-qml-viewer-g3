@@ -8,6 +8,8 @@ QT       += core quick serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+LIBS += -lasound
+
 TARGET = qml-viewer
 TEMPLATE = app
 
@@ -32,14 +34,17 @@ SOURCES += \
     serialcontroller.cpp \
     mainviewcontroller.cpp \
     translator.cpp \
-    network.cpp
+    network.cpp \
+    beeper.cpp
 
 HEADERS += \
     serialcontroller.h \
     mainviewcontroller.h \
     common.h \
     translator.h \
-    network.h
+    network.h \
+    beeper.h \
+    sound.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
