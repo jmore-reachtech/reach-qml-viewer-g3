@@ -51,9 +51,10 @@ void Beeper::setSoundFile(const QString &path)
         free(m_wavePtr);
     }
 
-    qDebug() << "Reading wav header";
+    //qDebug() << "Reading wav header";
 
     ret = fread(&header, 1, sizeof(wav_header),file);
+    /*
     qDebug() << "Header read: " << ret << endl;
 
     qDebug() << "Riff: " << (char)header.riff[0] << (char)header.riff[1]
@@ -73,9 +74,9 @@ void Beeper::setSoundFile(const QString &path)
     qDebug() << "Data Chunk: " << (char)header.data[0] << (char)header.data[1]
              << (char)header.data[2] << (char)header.data[3];
     qDebug() << "Data Size: " << header.data_size << endl;
-
+    */
     m_waveFrames = (header.data_size * 8) / header.bits_per_sample;
-    qDebug() << "Frames: " << m_waveFrames << endl;
+   //qDebug() << "Frames: " << m_waveFrames << endl;
 
     /* We only support a Signed 16 bit little endian, rate 44100 Hz, Mono */
     if ((header.sample_per_sec != HZ_44100) && (header.bits_per_sample != BITS_PER_SAMPLE_16)
@@ -127,8 +128,6 @@ void Beeper::beep()
     if (frames < 0) {
         qDebug("Error playing wave: %s \n", snd_strerror(frames));
         frames = snd_pcm_recover(m_playbackHandle, frames, 0);
-    } else {
-        qDebug() << "Frames played: " << frames;
     }
 
     /* Wait for playback to completely finish */

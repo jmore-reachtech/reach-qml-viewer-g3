@@ -35,7 +35,9 @@ SOURCES += \
     mainviewcontroller.cpp \
     translator.cpp \
     network.cpp \
-    beeper.cpp
+    beeper.cpp \
+    gpiopin.cpp \
+    gpiocontroller.cpp
 
 HEADERS += \
     serialcontroller.h \
@@ -44,7 +46,10 @@ HEADERS += \
     translator.h \
     network.h \
     beeper.h \
-    sound.h
+    sound.h \
+    i2c-dev.h \
+    gpiopin.h \
+    gpiocontroller.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

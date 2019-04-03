@@ -11,6 +11,7 @@
 #include "translator.h"
 #include "network.h"
 #include "beeper.h"
+#include "gpiopin.h"
 
 static void unixSignalHandler(int signum) {
     qDebug("[QML] main.cpp::unixSignalHandler(). signal = %s", strsignal(signum));
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
     /* Need to register before the MainviewController is instantiated */
     qmlRegisterType<Network>("net.reachtech", 1, 0, "Network");
     qmlRegisterType<Beeper>("sound.reachtech", 1, 0, "Beeper");
+    qmlRegisterType<GpioPin>("gpio.reachtech", 1, 0, "GpioPin");
 
     MainviewController mv;
 
