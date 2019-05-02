@@ -10,7 +10,12 @@
 #define GPIO_OUT_REG        0x01
 #define GPIO_POLARITY_REG   0x02
 #define GPIO_CTRL_REG       0x03
+#define GPIO_MIN_PIN        0
 #define GPIO_MAX_PIN        7
+#define GPIO_PIN_HIGH       1
+#define GPIO_PIN_LOW        0
+#define GPIO_PIN_OUTPUT     GPIO_PIN_LOW
+#define GPIO_PIN_INPUT      GPIO_PIN_HIGH
 
 class GpioController : public QObject
 {

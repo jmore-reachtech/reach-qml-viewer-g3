@@ -36,15 +36,14 @@ public slots:
     void setValue(int);
 
 private slots:
-    void onPinDirectionChanged(const QString&);
-    void onPinValueChanged(int);
     void onPinPoll(void);
 
 private:
-    int     m_num;
-    QString m_dir;
-    int     m_val;
-    QTimer  m_poll;
+    int             m_num;
+    QString         m_dir;
+    int             m_val;
+    QTimer          m_poll;
+    GpioController& m_pinController;
 };
 
 #endif // GPIOPIN_H
