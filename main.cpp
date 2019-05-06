@@ -12,6 +12,7 @@
 #include "network.h"
 #include "beeper.h"
 #include "gpiopin.h"
+#include "backlight.h"
 
 static void unixSignalHandler(int signum) {
     qDebug("[QML] main.cpp::unixSignalHandler(). signal = %s", strsignal(signum));
@@ -28,6 +29,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Network>("net.reachtech", 1, 0, "Network");
     qmlRegisterType<Beeper>("sound.reachtech", 1, 0, "Beeper");
     qmlRegisterType<GpioPin>("gpio.reachtech", 1, 0, "GpioPin");
+    qmlRegisterType<Backlight>("backlight.reachtech", 1, 0, "Backlight");
 
     MainviewController mv;
 

@@ -30,6 +30,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    backlight.cpp \
         main.cpp \
     serialcontroller.cpp \
     mainviewcontroller.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
     gpiocontroller.cpp
 
 HEADERS += \
+    backlight.h \
     serialcontroller.h \
     mainviewcontroller.h \
     common.h \
