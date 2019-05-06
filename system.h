@@ -18,6 +18,8 @@ public:
 signals:
 
 public slots:
+    QString execute(QString cmd);
+    QString execute(QString cmd, QStringList args);
 
 private:
     QString m_version;
