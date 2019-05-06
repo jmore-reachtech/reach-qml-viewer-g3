@@ -34,6 +34,7 @@ SOURCES += \
         main.cpp \
     serialcontroller.cpp \
     mainviewcontroller.cpp \
+    system.cpp \
     translator.cpp \
     network.cpp \
     beeper.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     serialcontroller.h \
     mainviewcontroller.h \
     common.h \
+    system.h \
     translator.h \
     network.h \
     beeper.h \
