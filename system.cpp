@@ -56,3 +56,9 @@ QString System::execute(QString cmd, QStringList args)
 
     return QString::fromLatin1(data.data());
 }
+
+bool System::executeUpgrade(QStringList args)
+{
+    return QProcess::startDetached("/usr/bin/qml-upgrade-helper.sh", args, "/data");
+
+}
