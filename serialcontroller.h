@@ -4,12 +4,14 @@
 #include <QObject>
 #include <QSerialPort>
 #include <QSettings>
-
+#include <QString>
+#include <QDebug>
 #include "translator.h"
 
 class SerialController : public QObject
 {
     Q_OBJECT
+    //Q_Property()
 
 public:
     explicit SerialController(QObject *parent = nullptr);

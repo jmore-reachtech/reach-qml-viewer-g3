@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQuickView>
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QStringList>
 #include <QSettings>

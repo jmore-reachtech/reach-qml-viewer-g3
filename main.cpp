@@ -1,4 +1,10 @@
-#include <QApplication>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+
+//#include <QApplication>
+
+#include <QQuickWindow>
+
 #include <QSettings>
 #include <QQmlContext>
 #include <QDebug>
@@ -23,8 +29,9 @@ static void unixSignalHandler(int signum) {
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    SerialController sc;
+    QGuiApplication a(argc, argv);
+    QQmlApplicationEngine engine;
+    SerialController serialController;
 
     /* Need to register before the MainviewController is instantiated */
     qmlRegisterType<Network>("net.reachtech", 1, 0, "Network");
@@ -39,13 +46,29 @@ int main(int argc, char *argv[])
     Translator tr;
     qDebug() << "Use translations";
     tr.load();
-    sc.setTranslator(tr);
+    serialController.setTranslator(tr);
 #else
     qDebug() << "Translations disabled";
 #endif
 
     /* Pass serial messages from the SerialController to the MainviewController */
-    QObject::connect(&sc, &SerialController::messageAvailable, &mv, &MainviewController::updateView);
+    QObject::connect(&serialController, &SerialController::messageAvailable, &mv, &MainviewController::updateView);
+
+    QObject *topLevel = mv.rootObjects().value(0);
+
+    if(topLevel == nullptr)
+    {
+        qDebug() << "Strike 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    }
+
+    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
+
+    if(window == nullptr)
+    {
+        qDebug() << "Strike 3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    }
+
+    QObject::connect(window, SIGNAL(submitTextField(QString)), &serialController, SLOT(send(QString)) );
 
     /* Set a signal handler for a power down or a control-c */
     if (signal(SIGTERM, unixSignalHandler) == SIG_ERR) {

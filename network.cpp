@@ -12,15 +12,21 @@ QString Network::ipAddress()
 {
     QNetworkInterface iface = QNetworkInterface::interfaceFromName("eth0");
 
+    qDebug() << "[NET] Up";
+
     if (!iface.isValid()) {
         return "127.0.0.1";
     }
 
-    foreach (auto ae, iface.addressEntries()) {
-        if (ae.ip().protocol() == QAbstractSocket::IPv4Protocol) {
-            return ae.ip().toString();
+    const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
+    for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost)
+        {
+            qDebug() << address.toString();
+            return address.toString();
         }
-    }
+}
+
 
     return "127.0.0.1";
 }

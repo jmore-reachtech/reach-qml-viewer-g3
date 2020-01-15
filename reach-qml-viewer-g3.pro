@@ -1,10 +1,4 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2019-02-11T08:53:18
-#
-#-------------------------------------------------
-
-QT       += core quick serialport
+QT       += core quick serialport gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # If you want to use the translate.conf file for message translations, set USE_TRANSLATIONS
-#DEFINES += USE_TRANSLATIONS
+DEFINES += USE_TRANSLATIONS
 
 CONFIG += c++11
 
@@ -56,10 +50,12 @@ HEADERS += \
     gpiocontroller.h
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
+qnx: target.path = /opt/$${TARGET}/bin
 else: unix:!android: target.path = /usr/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
     settings.conf.example \
     translate.conf.example
+
+FORMS +=

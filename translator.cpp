@@ -26,7 +26,7 @@ bool Translator::load()
     QTextStream in;
     int num = 1;
 
-    qDebug() << "translate load";
+    qDebug() << "Load translate File";
 
     m_guiMap.clear();
     m_microMap.clear();
@@ -58,7 +58,7 @@ bool Translator::load()
 QStringList Translator::translateGui(QString msg)
 {
     QStringList list = msg.split("=");
-    qDebug() << "translate gui msg ";
+//    qDebug() << "translate gui msg";
     return list;
 }
 
@@ -71,7 +71,7 @@ QStringList Translator::translateSerial(QString msg)
         return split;
     }
 
-    qDebug() << "Translate gui msg, key = " << split[0];
+    //qDebug() << "Translate gui msg, key = " << split[0];
     if (!m_microMap.contains(split[0])) {
         qDebug() << "Invalid key: " << split[0];
         return split;
@@ -99,6 +99,8 @@ bool Translator::addMapping(QString line, int num)
 {
     QString origin, key, target, msg;
 
+    qDebug() << "Line = " << line  << " entry num = " << num;
+
     /* Check for empty line */
     if (line == "\n" || line == "\r") {
         return false;
@@ -120,8 +122,7 @@ bool Translator::addMapping(QString line, int num)
             return false;
         }
 
-       qDebug() << "origin: " << list[0] << "key: " << targetPart[0]
-                << ", target: " << targetPart[1];
+       qDebug() << "origin:" << list[0] << "key:" << targetPart[0] << ", target:" << targetPart[1];
 
        if (list[0] == "M") {
            m_microMap.insert(targetPart[0],targetPart[1]);
@@ -134,5 +135,6 @@ bool Translator::addMapping(QString line, int num)
         return false;
     }
 
+    qDebug() << "Finished reading map file";
     return true;
 }
